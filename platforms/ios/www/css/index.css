@@ -1,0 +1,250 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    color:#000;
+    background-color: #fffe6e;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size:30px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(http://fc04.deviantart.net/fs70/f/2012/085/4/5/i_like_u_as_my_harvest_moon_chickens_by_malejoveza-d4u1hvg.png) no-repeat; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:20%;
+    top:17%;                  
+    text-align:center;
+    padding:100px 200px 200px 450px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;
+    box-shadow: 5px 5px 8px #ff881b;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:200px 400px 100px 300px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-30px 0px 0px 0px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:60px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    font-family: 'Chicle', sans-serif;
+    color: #ff5f3c;
+}
+
+.chicken_slogan {
+    font-size:28px;
+    font-weight:normal;
+    margin:10px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    font-family: 'Princess Sofia', sans-serif; 
+    color: red;
+    z-index: 9999;
+    position: relative; 
+}
+
+.chicken_menu {
+    background: url(http://slodive.com/wp-content/uploads/2011/05/polka-dot-backgrounds/pastel-polka-dots.jpg) repeat transparent;
+    box-shadow: 5px 5px 8px #ff5f3c;
+    height: 490px;
+}
+
+.chick_menu { 
+    color: #b36013; 
+    font-size: 36px; 
+    line-height: 26px; 
+    height: 3em; 
+    margin-top: 280px;
+    opacity: 1;
+    font-family: 'Chicle', sans-serif;
+    text-align:center;
+}
+
+a {
+    color: #ce230e;
+    display: inline-block;
+    line-height: 50px;
+}
+
+a:hover
+ {
+    color:orange;
+ }
+
+.hide {
+    display: none;
+ } 
+
+.chick_all_button {
+    color: #ff6e3c; 
+    border: solid 3px #ff6e3c; 
+    border-radius: 50%; 
+    background-color: #fff7f5; 
+    box-shadow: 5px 5px 5px; 
+    font-size: 24px; 
+    height: 70px; 
+    width: 95px; 
+    font-family: 'Chicle', sans-serif;
+}
+
+.chick_all_button:hover {
+    color: orange; 
+    border: solid 2px #ff7f4d; 
+    background-color: #fff7f6;
+}
+
+.chick_all_button:active {
+    color: #e19716; 
+    border: solid 2px #ee6e3c; 
+    background-color: #eee8e5; 
+    box-shadow: 1px 1px 1px; 
+    outline: none;
+}
+
+.chick_all_button:focus {
+    outline: none;
+} 
+
+.chicken_whisper {
+    text-align: center;
+    font-size: 18px;
+    padding: 3px;
+
+}
+
+.chick_resources { 
+    background-color: #fff4c9; 
+    width: 90%; 
+    height: 600px; 
+    margin-top: 8%;
+    margin-left: 4.4%; 
+    margin-right: 4.4%;
+    float: left; 
+    border: solid 3px #ff7e3c; 
+    overflow-y: scroll; 
+    box-shadow: 5px 5px 8px #ff881b; 
+    min-width: 200px;
+    font-family: 'Chicle', sans-serif;
+
+}
+
+.chick_resources textarea {
+    border: solid 3px #ff7e3c;
+    width: 90%;
+    margin: 2%;
+}
+
+.chick_resources h3 {
+    width: 95%;
+    text-align: center;
+}
+
+.chick_resources a {
+    width: 95%;
+    text-align: left;
+    padding-left: 3%;
+}
+
+.chick_post { 
+    width: 100%; 
+    font-size: 18px; 
+    padding: 3%; 
+    float: left; 
+    text-align: left;
+}
+
+h3 { 
+    font-family: 'Chicle', sans-serif; 
+    color: #ff7e3c; 
+    font-size: 36px; 
+    text-align: center;
+}
+
+.page {
+    display: none;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    height: 100%;
+}
+
+.activePage{
+    position: absolute;
+    top: 0px;
+    display: block;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
