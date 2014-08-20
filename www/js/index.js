@@ -129,5 +129,57 @@ function MovePageRight(to,from){
     }, time);
 }
 
+$('#chick_signup_button').click(function(){ 
+        Signup();
+    }); 
+
+$('.chick_contact_form').children().keypress(function(e){ 
+    if (e.keyCode==13){
+        Signup();
+        }
+}); 
+
+
+function Signup(){
+    var firstClient = $('input:text[name=chick_first_name]').val();
+    var lastClient = $('input:text[name=chick_last_name]').val();
+    var emailClient = $('input:text[name=chick_e-mail]').val();
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    var passwordClient = $('input:text[name=chick_password]').val();
+
+    if ((firstClient==null || typeof(firstClient)=="undefined" || firstClient<1) ||
+        (lastClient==null || typeof(lastClient)=="undefined" || lastClient<1) ||
+        (passwordClient==null || typeof(passwordClient)=="undefined" || passwordClient<1))
+        {$('.chicken_output').text("Tell us more about you.");
+        return false;   
+    }
+    if ( !emailReg.test(emailClient))
+            {$('.chicken_output').append("We need your e-mail for our spam files.");
+            return false;
+    }
+
+    if (emailClient==null || typeof(emailClient)=="undefined" || emailClient<1)
+        {$('.chicken_output').append("We need your e-mail for our spam files.");
+        return false;
+    }
+
+    $.ajax({
+        url: 'http://localhost:3000/api/signUp',
+        data: { firstSignUp: firstClient, lastSignUp: lastClient, emailSignUp: emailClient, passwordSignUp: passwordClient},
+        type: 'POST',
+        crossDomain: true,
+        dataType: 'json'
+        // beforeSend: function (xhr) {
+        //     xhr.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        //     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        //     xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        //     xhr.setRequestHeader("Content-Type", "text/plain");
+        //     xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+        // }
+    }).done(function(data){
+        console.log(data);
+        // $(location).attr('href',"/main/member");   
+    });
+};
 
 

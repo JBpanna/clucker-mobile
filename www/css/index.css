@@ -261,6 +261,25 @@ input:focus {
     font-size: 18px;
 }
 
+input { 
+    margin-bottom: 6px; 
+    line-height: 36px; 
+    width: 400px;
+    font-size: 30px;
+}
+
+.chicken_output {
+    color: red; 
+    background: #d08615;
+    border-radius: 40%;
+    box-shadow: 3px 3px 5px;
+    text-align: center;
+}
+
+input:focus {
+    outline-color: #ce561c;
+}
+
 .chick_form_bold { 
     margin-bottom: 6px; 
     line-height: 30px; 
