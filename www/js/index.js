@@ -66,6 +66,127 @@ var app = {
 // var to;
 // var from;
 
+$('#chick_signup_button').click(function(){ 
+        Signup();
+    }); 
+
+$('.chick_contact_form').children().keypress(function(e){ 
+    if (e.keyCode==13){
+        Signup();
+        }
+}); 
+
+
+function Signup(){
+    var firstClient = $('input:text[name=chick_first_name]').val();
+    var lastClient = $('input:text[name=chick_last_name]').val();
+    var emailClient = $('input:text[name=chick_e-mail]').val();
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    var passwordClient = $('input:text[name=chick_password]').val();
+
+    if ((firstClient==null || typeof(firstClient)=="undefined" || firstClient<1) ||
+        (lastClient==null || typeof(lastClient)=="undefined" || lastClient<1) ||
+        (passwordClient==null || typeof(passwordClient)=="undefined" || passwordClient<1))
+        {$('.chicken_output').text("Tell us more about you.");
+        return false;   
+    }
+    if ( !emailReg.test(emailClient))
+            {$('.chicken_output').append("We need your e-mail for our spam files.");
+            return false;
+    }
+
+    if (emailClient==null || typeof(emailClient)=="undefined" || emailClient<1)
+        {$('.chicken_output').append("We need your e-mail for our spam files.");
+        return false;
+    }
+
+    $.ajax({
+        url: 'http://localhost:3000/api/signUp',
+        data: { firstSignUp: firstClient, lastSignUp: lastClient, emailSignUp: emailClient, passwordSignUp: passwordClient},
+        type: 'POST',
+        crossDomain: true,
+        dataType: 'json'
+        // beforeSend: function (xhr) {
+        //     xhr.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        //     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        //     xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        //     xhr.setRequestHeader("Content-Type", "text/plain");
+        //     xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+        // }
+    }).done(function(data){
+        console.log(data);
+        MovePageRight('#pageMember', '#pageContact');   
+    });
+};
+
+$('.chick_index_button').click(function(){
+    pageSource = $(this).closest('.page')
+    MovePageLeft('#pageLogin', pageSource);
+});
+
+$('#chick_cancel_button').click(function(){
+    $('.chick_email_login').val('');
+    $('.chick_password_login').val('');
+    MovePageRight('#pageHome', '#pageLogin');   
+});                 
+
+
+$('#chick_continue_button').click(function(){ 
+    LoginMem();
+}); 
+
+$('.chick_login_center').children().keypress(function(e){ 
+    if (e.keyCode==13){
+        LoginMem();
+        }
+}); 
+
+function LoginMem(){
+    var emailMem = $('input:text[name=chick_email_login]').val();
+    var passwordMem = $('input:text[name=chick_password_login]').val();
+
+    if ((emailMem==null || typeof(emailMem)=="undefined" || emailMem<1) ||
+        (passwordMem==null || typeof(passwordMem)=="undefined" || passwordMem<1))
+        {$('.chicken_output').text("Only Anime Chicken Lovers May Enter");
+        return false;   
+    }
+
+    $.ajax({
+        url: 'http://localhost:3000/api/logIn',
+        data: { emailMem: emailMem, passwordMem: passwordMem},
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json'
+    }).done(function(data){
+        console.log(data);
+        MovePageRight('#pageMember', '#pageLogin');
+       // $(location).attr('href',"/main/member");
+        return true;
+    });
+    
+};
+
+// if ($('.chick_member').text() !== '') {
+    // $('.chick_index_button').addClass('hide');
+    // $('.chick_logout_button').removeClass('hide');
+// }
+// else { 
+    // $('.chick_index_button').removeClass('hide');
+    // $('.chick_logout_button').addClass('hide');
+// }
+
+$('.chick_logout_button').click(function(){
+        $.ajax({
+            url: 'http://localhost:3000/api/logout',
+            crossDomain: true,
+            dataType: 'json'
+        }).done(function(){
+            MovePageRight('#pageHome', '#pageMember');
+            
+        });
+            
+});
+
 $('.homepage_link').click(function(){
     pageSource = $(this).closest('.page')
         MovePageRight('#pageHome', pageSource);
@@ -128,58 +249,4 @@ function MovePageRight(to,from){
         $('body').css('overflow', '');
     }, time);
 }
-
-$('#chick_signup_button').click(function(){ 
-        Signup();
-    }); 
-
-$('.chick_contact_form').children().keypress(function(e){ 
-    if (e.keyCode==13){
-        Signup();
-        }
-}); 
-
-
-function Signup(){
-    var firstClient = $('input:text[name=chick_first_name]').val();
-    var lastClient = $('input:text[name=chick_last_name]').val();
-    var emailClient = $('input:text[name=chick_e-mail]').val();
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    var passwordClient = $('input:text[name=chick_password]').val();
-
-    if ((firstClient==null || typeof(firstClient)=="undefined" || firstClient<1) ||
-        (lastClient==null || typeof(lastClient)=="undefined" || lastClient<1) ||
-        (passwordClient==null || typeof(passwordClient)=="undefined" || passwordClient<1))
-        {$('.chicken_output').text("Tell us more about you.");
-        return false;   
-    }
-    if ( !emailReg.test(emailClient))
-            {$('.chicken_output').append("We need your e-mail for our spam files.");
-            return false;
-    }
-
-    if (emailClient==null || typeof(emailClient)=="undefined" || emailClient<1)
-        {$('.chicken_output').append("We need your e-mail for our spam files.");
-        return false;
-    }
-
-    $.ajax({
-        url: 'http://localhost:3000/api/signUp',
-        data: { firstSignUp: firstClient, lastSignUp: lastClient, emailSignUp: emailClient, passwordSignUp: passwordClient},
-        type: 'POST',
-        crossDomain: true,
-        dataType: 'json'
-        // beforeSend: function (xhr) {
-        //     xhr.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        //     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-        //     xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-        //     xhr.setRequestHeader("Content-Type", "text/plain");
-        //     xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-        // }
-    }).done(function(data){
-        console.log(data);
-        // $(location).attr('href',"/main/member");   
-    });
-};
-
 

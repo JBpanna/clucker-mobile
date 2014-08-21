@@ -70,6 +70,11 @@ h1 {
     color: #ff5f3c;
 }
 
+.image_background {
+    background: url(http://slodive.com/wp-content/uploads/2011/05/polka-dot-backgrounds/pastel-polka-dots.jpg) repeat transparent;
+    border-bottom: solid #ff5f3c 3px;
+}
+
 .chicken_slogan {
     font-size:28px;
     font-weight:normal;
@@ -339,6 +344,71 @@ p { margin-bottom: 3px;
     text-align: center;
     font-size: 20px;
     padding: 3px;
+}
+
+.chick_login {
+    position: fixed; 
+    top: 25%;
+    right: 28%; 
+    left: 28%; 
+    margin-right: auto; 
+    margin-left: auto; 
+    padding-left: auto; 
+    padding-right: auto; 
+    border: solid 2px #ff881b; 
+    background-color: yellow; 
+    height: 330px; 
+    max-width: 550px; 
+    box-shadow: 10px 10px 10px; 
+    border-radius: 50%; 
+    color: #ff6e3c; 
+    z-index: 500; 
+    opacity: 1;
+}
+
+.chick_login_center { 
+    margin-top: 20%; 
+    text-align: center; 
+    height: auto; 
+    width: auto; 
+    z-index: 500; 
+    margin-left: auto; 
+    margin-right: auto; 
+    padding-left: auto; 
+    padding-right: auto;
+}
+
+.chick_login_txt { 
+    position: relative; 
+    margin: auto; 
+    font-size: 18px; 
+    line-height: 36px; 
+    color: #94230d;
+}
+
+.chick_login_fancy { 
+    font-size: 20px; 
+    position: relative; 
+    margin: auto; 
+    line-height: 36px; 
+    font-family: 'Princess Sofia', sans-serif; 
+    color: red;
+}
+
+.chick_member {
+    color: #fb580f;
+}
+
+.private_posts {
+    width: 100%;
+    border: solid 2px #ee6e3c;
+
+}
+
+.public_posts {
+    width: 100%;
+    border: solid 2px #ee6e3c;
+
 }
 
 .page {
