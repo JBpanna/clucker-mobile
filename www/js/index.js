@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -63,8 +64,11 @@ var app = {
     }
 };
 
+
 // var to;
 // var from;
+var api_key;
+
 
 $('#chick_signup_button').click(function(){ 
         Signup();
@@ -115,7 +119,10 @@ function Signup(){
         // }
     }).done(function(data){
         console.log(data);
-        MovePageRight('#pageMember', '#pageContact');   
+        api_key = data.api_key;
+        $('.chick_index_button').addClass('hide');
+        $('.chick_logout_button').removeClass('hide');
+        MovePageRight('#pageMember', '#pageContact');  
     });
 };
 
@@ -159,13 +166,39 @@ function LoginMem(){
         dataType: 'json'
     }).done(function(data){
         console.log(data);
+        api_key = data.api_key;
+        $('.chick_index_button').addClass('hide');
+        $('.chick_logout_button').removeClass('hide');
         MovePageRight('#pageMember', '#pageLogin');
+        
        // $(location).attr('href',"/main/member");
-        return true;
     });
     
 };
 
+$('.btn-public').click(function(){
+        var cluckInput=$('textarea[name=public_message]').val();
+
+        if (cluckInput==null || typeof(cluckInput)=="undefined" || cluckInput<1)
+            {$('.chick_public_error').append("I didn't quite get that. Could you type it again?");
+            return false;
+        }
+    
+        if (cluckInput.length>142)
+            {$('.chick_public_error').text("Woah! Too much information.");
+            return false;   
+            }
+            
+            $.ajax({
+                url: 'http://localhost:3000/api/saveCluck',
+                data: { cluckClient: cluckInput, apiKey: api_key},
+                type: 'POST'
+            }).done(function(data){
+                console.log(data);
+                $('.public_message').val('');
+            });
+        
+    });
 // if ($('.chick_member').text() !== '') {
     // $('.chick_index_button').addClass('hide');
     // $('.chick_logout_button').removeClass('hide');
@@ -176,13 +209,15 @@ function LoginMem(){
 // }
 
 $('.chick_logout_button').click(function(){
+    $('.chick_index_button').removeClass('hide');
+    $('.chick_logout_button').addClass('hide');
+    MovePageRight('#pageHome', '#pageMember');
         $.ajax({
             url: 'http://localhost:3000/api/logout',
             crossDomain: true,
             dataType: 'json'
         }).done(function(){
-            MovePageRight('#pageHome', '#pageMember');
-            
+              
         });
             
 });
