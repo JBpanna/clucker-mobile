@@ -68,7 +68,8 @@ var app = {
 // var to;
 // var from;
 var api_key;
-
+var first_name;
+var text;
 
 $('#chick_signup_button').click(function(){ 
         Signup();
@@ -94,14 +95,16 @@ function Signup(){
         {$('.chicken_output').text("Tell us more about you.");
         return false;   
     }
+
+    alert(emailClient);
     if ( !emailReg.test(emailClient))
             {$('.chicken_output').append("We need your e-mail for our spam files.");
             return false;
     }
 
     if (emailClient==null || typeof(emailClient)=="undefined" || emailClient<1)
-        {$('.chicken_output').append("We need your e-mail for our spam files.");
-        return false;
+            {$('.chicken_output').append("We need your e-mail for our spam files.");
+            return false;
     }
 
     $.ajax({
@@ -120,6 +123,8 @@ function Signup(){
     }).done(function(data){
         console.log(data);
         api_key = data.api_key;
+        first_name = data.first_name;
+        $(".chick_member").html(first_name);
         $('.chick_index_button').addClass('hide');
         $('.chick_logout_button').removeClass('hide');
         MovePageRight('#pageMember', '#pageContact');  
@@ -167,6 +172,10 @@ function LoginMem(){
     }).done(function(data){
         console.log(data);
         api_key = data.api_key;
+        first_name = data.first_name;
+        text = data.text;
+        $(".chick_member").html(first_name);
+        $(".follow_clucks").html(text);
         $('.chick_index_button').addClass('hide');
         $('.chick_logout_button').removeClass('hide');
         MovePageRight('#pageMember', '#pageLogin');
@@ -199,6 +208,7 @@ $('.btn-public').click(function(){
             });
         
     });
+
 // if ($('.chick_member').text() !== '') {
     // $('.chick_index_button').addClass('hide');
     // $('.chick_logout_button').removeClass('hide');
